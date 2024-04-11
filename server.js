@@ -1,8 +1,13 @@
 require("dotenv").config();
 const express = require("express");
 const dbConnection = require("./config/dbConfig");
+const authRoutes = require('./routes/auth')
 
 const app = express();
+app.use(express.json())
+
+
+app.use("/api/v1/auth",authRoutes)
 
 app.get("/health", (req, res, next) => {
   try {
