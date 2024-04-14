@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
-const jwt = require('jsonwebtoken')
+const jwt = require("jsonwebtoken");
+const nodemailer = require("nodemailer");
 module.exports = {
   isEmail: (value) => {
     let re =
@@ -11,17 +12,17 @@ module.exports = {
     let intRegex = /[0-9 -()+]+$/;
     return intRegex.test(value);
   },
-  hashed_password: async (password) => {
+  hashData: async (data) => {
     try {
-      const hashedPassword = await bcrypt.hash(password, 10);
+      const hashedPassword = await bcrypt.hash(data, 10);
       return hashedPassword;
     } catch (error) {
       throw error;
     }
   },
-  comparePassword: async (data, password) => {
+  comparehashedData: async (HashedData, data) => {
     try {
-      return await bcrypt.compare(data, password);
+      return await bcrypt.compare(HashedData, data);
     } catch (error) {
       console.log(error);
     }
@@ -34,4 +35,12 @@ module.exports = {
       console.log(error);
     }
   },
+  generateOtp: async () => {
+    try {
+      return (otp = `${Math.floor(1000 + Math.random() * 9000)}`);
+    } catch (error) {
+      throw error;
+    }
+  },
+
 };
