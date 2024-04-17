@@ -11,7 +11,7 @@ router.post("/login", auth.loginUser);
 
 router.post("/resetPassword",auth.resetPassword)
 
-
+// Protected routes
 router.get("/protected", verifyToken, (req, res, next) => {
   res.status(200).json({
     message: "ur in a private route",
